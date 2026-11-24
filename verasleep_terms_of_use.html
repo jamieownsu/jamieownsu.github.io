@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Terms of Use - VeraSleep</title>
       <style>
+         :root { color-scheme: light dark; }
          body {
             background-color: #ffffff;
             color: #1a1a1a;
@@ -12,6 +13,7 @@
             line-height: 1.6;
             margin: 0;
             padding: 32px 20px;
+            top: 0px !important;
          }
          .container {
             max-width: 720px;
@@ -40,7 +42,15 @@
          .updated {
             font-size: 14px;
             color: #555555;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
+         }
+         .translation-note {
+            font-size: 13px;
+            color: #555555;
+            background-color: rgba(128, 128, 128, 0.1);
+            border-left: 3px solid rgba(128, 128, 128, 0.45);
+            padding: 8px 12px;
+            margin: 12px 0 24px;
          }
          a {
             color: #0066cc;
@@ -49,12 +59,34 @@
          a:hover {
             text-decoration: underline;
          }
+         @media (prefers-color-scheme: dark) {
+            body {
+               background-color: #141218;
+               color: #e6e1e9;
+            }
+            h1, h2 {
+               color: #ffffff;
+            }
+            .updated, .translation-note {
+               color: #c4c0c9;
+            }
+            a {
+               color: #b9a7ff;
+            }
+         }
+         .goog-te-banner-frame.skiptranslate,
+         .VIpgJd-ZVi9od-ORHb-OEVmcd {
+            display: none !important;
+         }
       </style>
    </head>
    <body>
       <div class="container">
+         <div id="google_translate_element" style="margin-bottom: 16px;"></div>
+
          <h1>Terms of Use</h1>
          <p class="updated">Last Updated: November 21, 2026</p>
+         <p class="translation-note"><strong>Note:</strong> Translations are provided for convenience only. In the event of any discrepancy or conflict in meaning, the original English version of these Terms of Use shall govern.</p>
 
          <p>Please read these Terms of Use ("Terms") carefully before using the <strong>VeraSleep</strong> mobile application (the "App") operated by <strong>Chalupin Software</strong> ("we," "us," or "our"). By downloading, accessing, or using the App, you agree to be bound by these Terms.</p>
 
@@ -97,5 +129,37 @@
          <h2>11. Contact Us</h2>
          <p>If you have any questions about these Terms of Use, please contact us at <a href="mailto:chalupinsoftware@gmail.com">chalupinsoftware@gmail.com</a>.</p>
       </div>
+
+      <script>
+         function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+               {
+                  pageLanguage: 'en',
+                  autoDisplay: false
+               },
+               'google_translate_element'
+            );
+
+            const browserLang = (navigator.language || navigator.userLanguage || 'en')
+               .toLowerCase()
+               .split('-')[0];
+
+            if (browserLang && browserLang !== 'en') {
+               const checkDropdown = setInterval(() => {
+                  const select = document.querySelector('.goog-te-combo');
+                  if (select && select.options.length > 1) {
+                     clearInterval(checkDropdown);
+                     const fullLang = (navigator.language || '').toLowerCase();
+                     const hasOption = Array.from(select.options).some(opt => opt.value.toLowerCase() === browserLang);
+                     select.value = hasOption ? browserLang : fullLang;
+                     select.dispatchEvent(new Event('change'));
+                  }
+               }, 200);
+
+               setTimeout(() => clearInterval(checkDropdown), 5000);
+            }
+         }
+      </script>
+      <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
    </body>
 </html>
